@@ -149,7 +149,24 @@ Return the resulting output array.
 ------------------------------------------------------------------------------------------------ */
 
 const fizzbuzz = (arr) => {
-  // Solution code here...
+  let fizzbuzzed = [];
+  arr.forEach( (value, index) => {
+    //standard fizzbuzz logic: gotta check for modulo 15 before modulo 5 or 3 since an else if won't fire off if its if statement is also true
+    if(!(value % 15)){
+      //Actually include the space...
+      fizzbuzzed.push("Fizz Buzz");
+    }
+    else if(!(value % 5)){
+      fizzbuzzed.push("Buzz");
+    }
+    else if(!(value % 3)){
+      fizzbuzzed.push("Fizz");
+    }
+    else{
+      fizzbuzzed.push(value);
+    }
+  })
+  return fizzbuzzed;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -206,7 +223,7 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   const inputs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   test('It should print out messages or numbers', () => {
