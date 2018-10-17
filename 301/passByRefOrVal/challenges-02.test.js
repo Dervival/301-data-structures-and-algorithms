@@ -88,7 +88,9 @@ console.log(a) prints [1, 2, 3, 4]
 
 const append = (arr1, arr2) => {
   // Solution code here...
-
+  for(let bitsToPush = 0; bitsToPush < arr2.length; bitsToPush++){
+    arr1.push(arr2[bitsToPush]);
+  }
 }
 
 /* ------------------------------------------------------------------------------------------------
