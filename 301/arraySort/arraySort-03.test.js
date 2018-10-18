@@ -134,9 +134,6 @@ const sortPeopleBetter = (arr) => {
   return arr.sort(function(first, second){
     if(first.lastName === second.lastName){
       let firstNameComparison = first.firstName > second.firstName;
-      // console.log(first.firstName + ' firstName');
-      // console.log(second.firstName + ' secondName');
-      // console.log(firstNameComparison + ' firstNameComparison');
       if(first.firstName === second.firstName){
         return first.age > second.age;
       }
@@ -174,8 +171,35 @@ const meetings = [
 
 const sortMeetingsByDay = (arr) => {
   // Solution code here...
+  return arr.sort(function(first, second){
+    return sortDayNameHelper(first.dayOfWeek) > sortDayNameHelper(second.dayOfWeek);
+  });
 };
 
+const sortDayNameHelper = (dayName) => {
+  let dayConverted = 0;
+  switch(dayName.toUpperCase()){
+    case 'MONDAY':
+      dayConverted = 1;
+      break;
+    case 'TUESDAY':
+      dayConverted = 2;
+      break;
+    case 'WEDNESDAY':
+      dayConverted = 3;
+      break;
+    case 'THURSDAY':
+      dayConverted = 4;
+      break;
+    case 'FRIDAY':
+      dayConverted = 5;
+      break;
+    default:
+      dayConverted = 0;
+      break;
+  }
+  return dayConverted;
+}
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 10 - Stretch Goal
 
@@ -295,7 +319,7 @@ describe('Testing challenge 8', () => {
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   test('It should sort meetings by the day on which they happen', () => {
     const sortedMeetings = sortMeetingsByDay(meetings);
     expect(sortedMeetings.slice(0,2)).toEqual(expect.arrayContaining([new Meeting('Monday', '0900', '0945'), new Meeting('Monday', '0900', '1000')]));
