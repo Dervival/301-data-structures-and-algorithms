@@ -72,6 +72,9 @@ Here is an example of the input:
 
 const sortByPrice = (arr) => {
   // Solution code here...
+  return arr.sort(function(first, second){
+    return first.price > second.price;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -84,6 +87,11 @@ For example, [1, 14, 0.2, -281, 54782] is only correctly sorted in that order.
 
 const sortNumbersByLength = (arr) => {
   // Solution code here...
+  return arr.sort(function(first, second){
+    let firstLength = first.toString().length;
+    let secondLength = second.toString().length;
+    return firstLength > secondLength;
+  });
 };
 
 /*-----------------------------------------------------------------------------------------------
@@ -106,6 +114,9 @@ const people = [
 
 const sortPeople = (arr) => {
   // Solution code here...
+  return arr.sort(function(first, second){
+    return first.lastName > second.lastName;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -211,7 +222,7 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should sort items by their price', () => {
     expect(sortByPrice([
       {name: 'Sweatshirt', price: 45},
@@ -227,15 +238,14 @@ xdescribe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should sort numbers by their length', () => {
     expect(sortNumbersByLength([10, 2.8, 1, -47.75])).toStrictEqual([1, 10, 2.8, -47.75]);
     expect(sortNumbersByLength([100, 2.82, 1, -47.75])).toStrictEqual([1, 100, 2.82, -47.75]);
     expect(sortNumbersByLength([1,2,3])).toEqual(expect.arrayContaining([1,2,3]))
   });
 });
-
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should sort people by their last names', () => {
     expect(sortPeople(people)).toStrictEqual([
       new Person('Casey', 'Codefellow', 38),
