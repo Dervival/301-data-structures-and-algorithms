@@ -266,6 +266,7 @@ const extractVowels = (str) => {
   vowelChar.sort(function(first, second){
     return first > second;
   });
+  //return both elements in the array
   return [arrayChar.join(''), vowelChar.join('')];
 };
 
