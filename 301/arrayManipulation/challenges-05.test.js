@@ -33,7 +33,7 @@ For example, wordsToCharList('gregor') returns ['g','r','e','g','o','r'].
 const wordsToCharList = (arr) => {
   let charList = [];
   // Solution code here...
-  for(let i = 0; i < arr.length-1; i++){
+  for(let i = 0; i < arr.length; i++){
     charList.push(arr.slice(i,i+1));
   }
   return charList;
@@ -84,6 +84,17 @@ const gruffaloCrumble = {
 const listFoods = (recipe) => {
   let result = [];
   // Solution code here...
+  //looks like 'foods' are basically all but the first two words of the string? Look for whitespace
+  for(let i = 0; i < recipe.ingredients.length; i++){
+    let arrWhiteSpace = [];
+    for(let j = 0; j < recipe.ingredients[i].length; j++){
+      let checkedChar = recipe.ingredients[i].slice(j, j+1);
+      if(checkedChar === ' '){
+        arrWhiteSpace.push(j);
+      }
+    }
+    result.push(recipe.ingredients[i].slice(arrWhiteSpace[1]+1));
+  }
   return result;
 }
 
@@ -222,7 +233,7 @@ describe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should return a list of foods', () => {
     expect(listFoods(gruffaloCrumble)).toStrictEqual(['Gruffalo', 'oats', 'brown sugar', 'flour', 'pure maple syrup', 'chopped nuts', 'baking soda', 'baking powder', 'cinnamon', 'melted butter', 'fresh water']);
     expect(listFoods(gruffaloCrumble).length).toStrictEqual(11);
