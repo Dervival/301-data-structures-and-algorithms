@@ -160,8 +160,9 @@ For example:
 const removeEvenValues = (arr) => {
   // Solution code here...
   for(let i = 0; i < arr.length; i++){
-    if(arr[i]%2){
+    if(!(arr[i]%2)){
       arr.splice(i,1);
+      i--; //removing an element via splice; rollback the iterator
     }
   }
   return arr;
