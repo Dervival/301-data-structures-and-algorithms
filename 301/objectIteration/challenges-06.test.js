@@ -110,6 +110,13 @@ hasChildrenValues(characters, 'Eddard') will return false
 
 const hasChildrenValues = (arr, character) => {
   // Solution code here...
+  //Shouldn't the two returns in the example be swapped?
+  for(let i in arr){
+    if(arr[i].name === character){
+      return arr[i].children.length;
+    }
+  }
+  return false;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -194,7 +201,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return true for characters that have children', () => {
     expect(hasChildrenValues(characters, 'Daenarys')).toBeTruthy();
   });
