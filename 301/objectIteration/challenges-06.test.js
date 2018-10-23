@@ -72,8 +72,8 @@ const totalCharacters = (arr) => {
   // Solution code here...
   let counter = 0;
   for(let i in arr){
-    console.log(arr[i]);
-    if(arr[i].name != ""){
+    // console.log(arr[i]);
+    if(arr[i].name != ''){
       counter++;
     }
   }
@@ -88,7 +88,11 @@ Write a function named getHouses that returns a new array containing the names o
 
 const getHouses = (arr) => {
   let houses = [];
-  // Solution code here...
+  for(let i in arr){
+    if(arr[i].house != ''){
+      houses.push(arr[i].house);
+    }
+  }
   return houses;
 }
 
@@ -183,7 +187,7 @@ describe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('something specific', () => {
     expect(getHouses(characters)).toStrictEqual([ 'Stark', 'Arryn', 'Lannister', 'Targaryen', 'Tyrell', 'Stark', 'Snow' ]);
     expect(getHouses(characters).length).toStrictEqual(7);
