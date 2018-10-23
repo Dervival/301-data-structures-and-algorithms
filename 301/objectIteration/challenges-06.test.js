@@ -111,12 +111,21 @@ hasChildrenValues(characters, 'Eddard') will return false
 const hasChildrenValues = (arr, character) => {
   // Solution code here...
   //Shouldn't the two returns in the example be swapped?
-  for(let i in arr){
+  /*for(let i in arr){
     if(arr[i].name === character){
       return arr[i].children.length;
     }
   }
-  return false;
+  return false;*/
+  //Actually it needs to use Object.values
+  let returnVal = false;
+  let values = Object.values(arr);
+  for(let i = 0; i < values.length; i++){
+    if(values[i].name === character && values[i].children.length > 0){
+      returnVal = true;
+    }
+  }
+  return returnVal;
 }
 
 /* ------------------------------------------------------------------------------------------------
