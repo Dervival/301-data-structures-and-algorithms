@@ -161,6 +161,17 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 const houseSize = (arr) => {
   const sizes = [];
   // Solution code here...
+  for(let i = 0; i < arr.length; i++){
+    let house = arr[i].house;
+    let members = arr[i].children.length;
+    if(arr[i].name){
+       members++;
+    }
+    if(arr[i].spouse){
+       members++;
+    }
+    sizes.push({house, members});
+  }
   return sizes;
 }
 
@@ -185,6 +196,17 @@ const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 const houseSurvivors = (arr) => {
   const survivors = [];
   // Solution code here...
+  for(let i = 0; i < arr.length; i++){
+    let house = arr[i].house;
+    let members = arr[i].children.length;
+    if(arr[i].name){
+       members++;
+    }
+    if(arr[i].spouse && !deceasedSpouses.includes(arr[i].spouse)){
+       members++;
+    }
+    survivors.push({house, members});
+  }
   return survivors;
 }
 
@@ -238,14 +260,14 @@ describe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return an object for each house containing the name and size', () => {
     expect(houseSize(characters)).toStrictEqual([ { house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, { house: 'Lannister', members: 5 }, { house: 'Targaryen', members: 5 }, { house: 'Tyrell', members: 4 }, { house: 'Stark', members: 2 }, { house: 'Snow', members: 1 } ]);
     expect(houseSize(characters).length).toStrictEqual(7);
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should not include any deceased spouses', () => {
     expect(houseSurvivors(characters)).toStrictEqual([ { house: 'Stark', members: 6 }, { house: 'Arryn', members: 2 }, { house: 'Lannister', members: 4 }, { house: 'Targaryen', members: 4 }, { house: 'Tyrell', members: 3 }, { house: 'Stark', members: 2 }, { house: 'Snow', members: 1 } ]);
   });
