@@ -10,6 +10,10 @@ For example, oddValues([1,2,3]) returns [1,3].
 
 const oddValues = (arr) => {
   // Solution code here...
+  //arr.filter returns an array of values from the passed in array that return true
+  return arr.filter( n => {
+    return (n % 2);
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -25,6 +29,12 @@ For example, filterStringsWithVowels('gregor','hound','xyz') returns ['gregor', 
 
 const filterStringsWithVowels = (arr) => {
   // Solution code here...
+  //Taking this from last Friday's challenges...
+  //Weird, the global flag makes it so hound isn't caught
+  let vowelRegex = /[aeiou]/;
+  return arr.filter( wordToParse => {
+    return vowelRegex.test(wordToParse);
+  });
 };
 
 
@@ -180,7 +190,7 @@ describe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should return an array containing only words that have vowels', () => {
     expect(filterStringsWithVowels(['gregor','hound','xyz'])).toStrictEqual(['gregor', 'hound']);
     expect(filterStringsWithVowels(['gregor','hound','xyz']).length).toStrictEqual(2);
