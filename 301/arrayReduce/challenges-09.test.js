@@ -91,7 +91,6 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 const reversedString = (arr) => {
   // Solution code here...
   let arrArray = arr.split('');
-  console.log(arrArray)
   let reversedArray = arrArray.reduce((newArray, character, index) =>{
     newArray.push(arrArray[(arrArray.length-1)-index]);
     return newArray;
@@ -150,6 +149,12 @@ const characters = [
 
 const countNumberOfChildren = (arr) => {
   // Solution code here...
+  return arr.reduce((names, character) => {
+    if(character.children){
+      names += character.children.length;
+    }
+    return names;
+  }, 0);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -162,6 +167,7 @@ Hint: The accumulator should begin as { count: 0, sum: 0 }
 
 const calculateAverage = (arr) => {
   // Solution code here...
+  
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -271,7 +277,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should return the total number of children', () => {
     expect(countNumberOfChildren(characters)).toStrictEqual(14);
   });
