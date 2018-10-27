@@ -267,14 +267,16 @@ const extractChildren = (arr) => {
   let regexString = /a/;
   let charActers = arr.filter( character =>{
     return regexString.test(character.name);
-  })
-  console.log(charActers);
+  });
   //Credit to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Flatten_an_array_of_arrays for how to flatten an array with .reduce
-  return charActers.reduce((childA, charActer) =>{
+  let testArray = charActers.reduce((childA, charActer) =>{
     if(charActer.children){
-      childA.concat(charActer.children);
+       return childA.concat(charActer.children);
     }
+    //can't only return inside the if statement; returns undefined if the last (or any?) objects don't have a .children array
+    return childA;
   },[]);
+  return testArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -330,7 +332,7 @@ describe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should return an array containing the names of the children', () => {
     expect(extractChildren(characters)).toStrictEqual([ 'Robb', 'Sansa', 'Arya', 'Bran', 'Rickon', 'Drogon', 'Rhaegal', 'Viserion', 'Margaery', 'Loras' ]);
     expect(extractChildren(characters).length).toStrictEqual(10);
