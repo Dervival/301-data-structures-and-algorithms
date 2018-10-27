@@ -167,7 +167,10 @@ Hint: The accumulator should begin as { count: 0, sum: 0 }
 
 const calculateAverage = (arr) => {
   // Solution code here...
-  
+  // Being lazy - using two reduce loops for this. Not entirely sure how to coalesce into 1, though
+  const counter = (count) => count + 1;
+  const accumulator = (acc, val) => acc + val;
+  return (arr.reduce(accumulator, 0)/arr.reduce(counter, 0));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -189,6 +192,15 @@ const isPrime = (value) => {
 
 const countPrimeNumbers = (arr) => {
   // Solution code here...
+  //Don't mind if I do, sieving methods are tried and tested already
+  //Wouldn't this be better done as a filter though?
+  //wait no you want the count, not the array; that simplifies things and explains why to use reduce
+  return arr.reduce((primes, value) => {
+    if(isPrime(value)){
+      primes++;
+    }
+    return primes;
+  }, 0); 
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -283,13 +295,13 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return the average of the numbers in the array', () => {
     expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85 ])).toStrictEqual(64);
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return a count of the prime numbers in the array', () => {
     expect(countPrimeNumbers([1, 2, 13, 64, 45, 56, 17, 8])).toStrictEqual(3);
   });
