@@ -244,6 +244,12 @@ const snorlaxData = {
 
 const extractStat = (statName, arr) => {
   // Solution code here...
+  return arr.reduce((result, statBlock) => {
+    if(statBlock.stat.name === statName){
+      result += statBlock;
+    }
+    return result;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -258,6 +264,17 @@ Write a function named extractChildren that, given the array of characters from 
 
 const extractChildren = (arr) => {
   // Solution code here...
+  let regexString = /a/;
+  let charActers = arr.filter( character =>{
+    return regexString.test(character.name);
+  })
+  console.log(charActers);
+  //Credit to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce#Flatten_an_array_of_arrays for how to flatten an array with .reduce
+  return charActers.reduce((childA, charActer) =>{
+    if(charActer.children){
+      childA.concat(charActer.children);
+    }
+  },[]);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -307,7 +324,7 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should return any stats that match the input', () => {
     expect(extractStat('speed', snorlaxData.stats)).toStrictEqual({ stat: { url: 'https://pokeapi.co/api/v2/stat/6/', name: 'speed' }, effort: 5, baseStat: 30 });
   });
