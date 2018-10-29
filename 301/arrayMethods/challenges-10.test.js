@@ -151,14 +151,23 @@ let findShortest = (data) => {
   // Solution code here...
   // Wait, what challenge 6?
   // C3-PO and R2-D2 are both shortest...?
-  let nameArray = data.map(character =>{
-    return character.name;
-  });
-  nameArray.sort((first, second) =>{
-    return first.length - second.length;
-  })
-  //return nameArray[0]; C3-PO
-  return nameArray[1]; //R2-D2
+  // In name length, not in actual height >.<
+  // let nameArray = data.map(character =>{
+  //   return character.name;
+  // });
+  // nameArray.sort((first, second) =>{
+  //   return first.height - second.height;
+  // })
+  // return nameArray[0];
+  let shortestCharacter = data.reduce((shortest, next) =>{
+    if(parseInt(shortest.height) > parseInt(next.height)){
+      return next;
+    }
+    else{
+      return shortest;
+    }
+  },data[0]);
+  return shortestCharacter.name;
 }
 
 /* ------------------------------------------------------------------------------------------------
