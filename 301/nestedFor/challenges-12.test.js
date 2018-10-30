@@ -206,6 +206,19 @@ For example, excel('1,1,1\n4,4,4\n9,9,9') returns [3, 12, 27].
 
 const excel = (str) => {
   // Solution code here...
+  // split into strings representing rows
+  let strArr = str.split('\n');
+  let returnArr = [];
+  for(let i = 0; i < strArr.length; i++){
+    let tempArr = strArr[i].split(',');
+    for(let j = 0; j < tempArr.length; j++){
+      tempArr[j] = parseInt(tempArr[j]);
+    }
+    returnArr.push(tempArr.reduce((acc, val) =>{
+      return acc + val;
+    }, 0));
+  }
+  return returnArr;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -299,7 +312,7 @@ describe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should return the total count for each row', () => {
     let result = excel('1,1,1\n4,4,4\n9,9,9');
     expect(result.length).toStrictEqual(3);
