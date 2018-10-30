@@ -35,7 +35,15 @@ const validateEmail = (email) => {
   // Start by filtering out special characters - non-word characters except for @ and .
   let specialRegex = /[^A-Z@.]/gi;
   if(specialRegex.test(email)) return false;
-  return true;
+  let mailRegex = /(^)([A-Z]+\.)?([A-Z]+@)([A-Z]+)((\.com)|(\.net)|(\.org))($)/gi;
+  // let's explain this from right to left -
+  // ($) - ending anchor - we're only validating that the string given is a email address, not that it contains an email address
+  // ((\.com)|(\.net)|(\.org)) - make sure it ends with one of the top-level domains given
+  // ([A-Z]+) - any number of characters for domain name
+  // ([A-Z]+@) - any number of characters for last name, with an @ for the domain
+  // ([A-Z]+\.)? - allow for the possibility of a first name, with a dot separator
+  // (^) - starting anchor, used for the same reasons as the ending anchor
+  return mailRegex.test(email);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -65,6 +73,16 @@ const validatePhoneNumber = (phoneNumber) => {
   // Area code must be 3 digits, but can be encapsulated in parenthesis or not. There can be a space, dash, or nothing between area code and prefix.
   // Prefix must be 3 digits. There can be a space, dash, or nothing between the prefix and the area code. There can be a space, dash, or nothing between the prefix and postfix.
   // Postfix must be 4 digits. There can be a space, dash, or nothing between the postfix and the prefix.
+  let phoneRegex = /(^)((\d{3})|(\(\d{3}\)))[ -]?\d{3}[- ]?\d{4}($)/;
+  // So let's explain this from right to left
+  // ($) - we're only looking at single string that either completely matches a string or not. Since it's not embedded in a string, we should use anchoring
+  // \d{4} - phone numbers always end in four digits
+  // [- ]? - we can have either a dash (-), a space ( ), or nothing between the postfix and prefix
+  // \d{3} - prefix needs to be three digits
+  // [- ]? - we can have either a dash (-), a space ( ), or nothing between the prefix and area code
+  // ((\d{3})|(\(\d{3}\))) - area code needs to be three digits, with possible parens around it
+  // (^) - similar to the end anchor, I want to anchor the beginning as well
+  return phoneRegex.test(phoneNumber);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -103,7 +121,7 @@ describe('Testing challenge 1', () => {
   });
 });
 
-xdescribe('Testing challenge 2', () => {
+describe('Testing challenge 2', () => {
   test('It should match a basic email', () => {
     expect(validateEmail('joe@codefellows.com')).toBeTruthy();
   });
@@ -133,7 +151,7 @@ xdescribe('Testing challenge 2', () => {
   })
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should match the acceptable phone number formats', () => {
     expect(validatePhoneNumber('(555) 555-5555')).toBeTruthy();
     expect(validatePhoneNumber('555 555-5555')).toBeTruthy();
