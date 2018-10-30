@@ -123,6 +123,11 @@ For example, the following input returns a product of 720: [[1,2], [3,4], [5,6]]
 
 const calculateProduct = (numbers) => {
   // Solution code here...
+  return numbers.reduce( (outerMult, nextArr) => {
+    return outerMult * nextArr.reduce( (innerMult, nextVal) =>{
+      return innerMult * nextVal;
+    }, 1);
+  }, 1);
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -143,6 +148,15 @@ const weeklyTemperatures = [
 
 const averageDailyTemperature = (weather) => {
   // Solution code here...
+  let days = 0;
+  let totalTemp = 0;
+  for(let i = 0; i < weather.length; i++){
+    for(let j = 0; j < weather[i].length; j++){
+      totalTemp += weather[i][j];
+    }
+    days += weather[i].length;
+  }
+  return totalTemp/days;
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -247,7 +261,7 @@ describe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should multiply all the numbers together', () => {
     expect(calculateProduct([[1,2], [3,4], [5,6]])).toStrictEqual(720);
   });
