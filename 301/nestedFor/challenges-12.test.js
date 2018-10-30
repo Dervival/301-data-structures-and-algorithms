@@ -274,7 +274,7 @@ describe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should calculate and return the average temperature of the data set', () => {
     expect(averageDailyTemperature(weeklyTemperatures)).toStrictEqual(60.25);
   });
