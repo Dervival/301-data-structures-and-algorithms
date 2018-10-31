@@ -126,6 +126,11 @@ For example, [['Brook Testing', 'Actual Person'], ['Human Person', 'Brook again'
 
 const unenrollBrook = (arr) => {
   // Solution code here...
+  return arr.map(array =>{
+    return array.filter( string =>{
+      return !string.includes('Brook');
+    })
+  })
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -246,7 +251,7 @@ describe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should remove Brook from all courses', () => {
     const roster = [
       ['Michelle', 'Allie', 'Brook TESTING'],
