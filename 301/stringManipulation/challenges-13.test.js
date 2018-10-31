@@ -40,6 +40,10 @@ For example, (123) 456-7890 returns 1234567890
 
 const standardizePhoneNumbers = (arr) => {
   // Solution code here...
+  return arr.map( string =>{
+    //(123) 456-7890 numbers at 1-4, 6-9, 10-14?
+    return (string.substring(1,4) + string.substring(6,9) + string.substring(10,14));
+  })
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -52,6 +56,13 @@ For example, 'abcdefg' returns 'bdf'
 
 const onlyOddChars = (str) => {
   // Solution code here...
+  let strAccum = '';
+  for(let i = 0; i < str.length; i++){
+    if(i%2){
+      strAccum += str.charAt(i);
+    }
+  }
+  return strAccum;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -171,7 +182,7 @@ describe('Testing challenge 2', () => {
   });
 });
 
-xdescribe('Testing challenge 3', () => {
+describe('Testing challenge 3', () => {
   test('It should return a standardized set of phone numbers', () => {
     const nums = ['(123) 456-7890', '(222) 222-2222'];
 
