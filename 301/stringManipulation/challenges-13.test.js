@@ -90,6 +90,9 @@ Write a function named findAnything that takes in an array of strings, along wit
 
 const findAnything = (arr, target) => {
   // Solution code here...
+  return arr.filter( string =>{
+    return string.includes(target);
+  })
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -100,6 +103,13 @@ Write a function named findEvery that takes in an array of strings, along with a
 
 const findEvery = (arr, target) => {
   // Solution code here...
+  let ret = true;
+  for(let i = 0; i < arr.length; i++){
+    if(!arr[i].includes(target)){
+      ret = false;
+    }
+  }
+  return ret;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -217,7 +227,7 @@ describe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should find all the strings that contain a given string', () => {
     const words = ['things', 'apple (:)', ':)banana', 'missing that thing', 'cant:)aloupe'];
 
@@ -226,7 +236,7 @@ xdescribe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should determine whether all the strings contain a given string', () => {
     const words = ['things', 'apple pie (:)', ':)banana pie', 'missing that thing', 'cant:)aloupe is tasty'];
 
