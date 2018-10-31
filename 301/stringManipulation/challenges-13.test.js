@@ -158,6 +158,15 @@ const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sat
 
 const sortByDay = (arr) => {
   // Solution code here...
+  return daysOfWeek.map( day =>{
+    let dayEventArray = []
+    arr.forEach( event =>{
+      if(event.includes(day)){
+        dayEventArray.push(event);
+      }
+    })
+    return dayEventArray;
+  })
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -269,7 +278,7 @@ describe('Testing challenge 8', () => {
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   test('It should sort events by the day on which they happen', () => {
     const events = ['Dancing on Mondays and Tuesdays', 'Meet the inventors! Monday, August 7', 'in the club on a Tuesday', 'Thursday Night Code', 'Saturday Night Fever'];
     const sortedEvents = sortByDay(events);
