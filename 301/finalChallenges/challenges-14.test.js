@@ -133,6 +133,8 @@ https:/missingslash.org returns false because the URL is malformed
 ------------------------------------------------------------------------------------------------ */
 const isSecure = (url) => {
 // Solution code here...
+  let testRegex = /(^)(https)(:\/\/)/;
+  return testRegex.test(url);
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -156,8 +158,36 @@ Here is a sample board:
 
 const detectTicTacToeWin = (board) => {
   // Solution code here...
+  for(let i = 0; i < board.length; i++){
+    if(board[0][i] && colCheck(board,0,i)){
+      return true;
+    }
+    else if(board[i][0] && rowCheck(board,i,0)){
+      return true;
+    }
+  }
+  if((board[0][0] && diagDownCheck(board,0,0) || board[0][2] && diagUpCheck(board,0,2))){
+    return true;
+  }
+  return false;
 }
 
+const helpCheck = (board,r1,c1,r2,c2,r3,c3) =>{
+  return(board[r1][c1] === board[r2][c2] && board[r3][c3] === board[r2][c2])
+}
+
+const rowCheck = (board,r,c) =>{
+  return(helpCheck(board,r,c,r,c+1,r,c+2));
+}
+const colCheck = (board,r,c) =>{
+  return(helpCheck(board,r,c,r+1,c,r+2,c));
+}
+const diagDownCheck = (board,r,c) =>{
+  return(helpCheck(board,r,c,r+1,c+1,r+2,c+2));
+}
+const diagUpCheck = (board,r,c) =>{
+  return(helpCheck(board,r,c,r+1,c-1,r+2,c-2));
+}
 /* ------------------------------------------------------------------------------------------------
 TESTS
 
@@ -214,7 +244,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
-xdescribe('Testing challenge 4', () => {
+describe('Testing challenge 4', () => {
   test('It should check if url is https', () => {
 
     expect(isSecure('http://www.insecure.com')).toBe(false); 
@@ -223,7 +253,7 @@ xdescribe('Testing challenge 4', () => {
   });
 });
 
-xdescribe('Testing challenge 5', () => {
+describe('Testing challenge 5', () => {
   test('It should return true if there are three in a row', () => {
     expect(detectTicTacToeWin([['X', '', 'O'], ['X', 'O', ''], ['X', 'O', 'X']])).toStrictEqual(true);
     expect(detectTicTacToeWin([['O', '', 'X'], ['X', 'O', 'X'], ['X', '', 'O']])).toStrictEqual(true);
